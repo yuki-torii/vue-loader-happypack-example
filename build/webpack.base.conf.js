@@ -2,6 +2,7 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var HappyPack = require('happypack')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -31,11 +32,23 @@ module.exports = {
       'components': resolve('src/components')
     }
   },
+  plugins: [
+    new HappyPack({
+      id: 'vue-loader',
+      threads: 4,
+      loaders: [ 'vue-loader' ]
+    }),
+    new HappyPack({
+      loaders: [{
+        path: 'vue-loader'
+      }]
+    })
+  ],
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: 'happypack/loader?id=vue-loader',
         options: vueLoaderConfig
       },
       {
