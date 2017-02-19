@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="less" scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

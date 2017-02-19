@@ -4,6 +4,8 @@ var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var HappyPack = require('happypack')
 
+console.log(vueLoaderConfig.loaders.css)
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -34,13 +36,24 @@ module.exports = {
   },
   plugins: [
     new HappyPack({
+      id: 'babel-loader',
+      threads: 4,
+      loaders: [ 'babel-loader' ]
+    }),
+    new HappyPack({
       id: 'vue-loader',
       threads: 4,
       loaders: [ 'vue-loader' ]
     }),
     new HappyPack({
       loaders: [{
-        path: 'vue-loader'
+        path: 'vue-loader',
+        query: {
+          loaders: {
+            stylus: '/Users/limi/yukiCode/vue-loader-happypack-example/node_modules/extract-text-webpack-plugin/loader.js?omit=1&remove=true!vue-style-loader!?minimize&sourceMap!stylus-loader',
+            less: '/Users/limi/yukiCode/vue-loader-happypack-example/node_modules/extract-text-webpack-plugin/loader.js?omit=1&remove=true!vue-style-loader!?minimize&sourceMap!less-loader'
+          }
+        }
       }]
     })
   ],
@@ -53,7 +66,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: 'happypack/loader?id=babel-loader',
         include: [resolve('src'), resolve('test')]
       },
       {
