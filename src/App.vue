@@ -7,11 +7,13 @@
 
 <script>
 import Hello from './components/Hello'
+import test from './components/test'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    Hello,
+    test
   }
 }
 </script>
