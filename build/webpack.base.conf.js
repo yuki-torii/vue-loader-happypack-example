@@ -4,8 +4,6 @@ var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var HappyPack = require('happypack')
 
-console.log(vueLoaderConfig.loaders.css)
-
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -49,10 +47,7 @@ module.exports = {
       loaders: [{
         path: 'vue-loader',
         query: {
-          loaders: {
-            stylus: '/Users/limi/yukiCode/vue-loader-happypack-example/node_modules/extract-text-webpack-plugin/loader.js?omit=1&remove=true!vue-style-loader!?minimize&sourceMap!stylus-loader',
-            less: '/Users/limi/yukiCode/vue-loader-happypack-example/node_modules/extract-text-webpack-plugin/loader.js?omit=1&remove=true!vue-style-loader!?minimize&sourceMap!less-loader'
-          }
+          vueLoaderConfig
         }
       }]
     })
